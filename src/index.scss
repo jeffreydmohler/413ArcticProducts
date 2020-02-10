@@ -1,0 +1,28 @@
+// @import "node_modules/bootstrap/scss/functions";
+// @import "node_modules/bootstrap/scss/variables";
+// @import "node_modules/bootstrap/scss/mixins";
+
+$primary:       #224b9c;
+$secondary:     #b0e6f7;
+$success:       #3d4055;
+$info:          #b0e6f7;
+$warning:       #882211;
+$danger:        #553322;
+$light:         #666666;
+$dark:          #555555;
+
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
