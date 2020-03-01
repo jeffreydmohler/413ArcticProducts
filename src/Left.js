@@ -7,19 +7,20 @@ import AppContext from './context'
 export default function Left(props) {
     
     let categories = {}
-    //let total = 0
+    let total = 0
     const context = React.useContext(AppContext)
-    console.log(context.categories)
+
     categories = context.categories
     
-    console.log(context.products)
+    //initialize total value in every category object
     for (const c of Object.values(categories)){
         c.total = 0
     }
-    console.log(categories)
+
+    //count up the number of products in each category. add to total value.
     for (const p of Object.values(context.products)){
         categories[p.category].total =   categories[p.category].total + 1
-        console.log(categories[p.category].title + ':' + categories[p.category].total)
+        total++
     }
 
    
@@ -28,12 +29,11 @@ export default function Left(props) {
            
         <Nav defaultActiveKey="/" className="flex-column pt-3 text-left">
             
-                <Link to="/" className="nav-link font-weight-bold">All Products ()</Link>
+                <Link to="/" className="nav-link font-weight-bold">All Products ({total})</Link>
 
-                 {/* {Object.entries(context.categories).sort().map( c => { */}
-                {Object.entries(categories).sort().map( ([c]) => {
+                {Object.values(categories).sort().map( (c) => {
                     return (
-                        <Link key={categories[c].id} className="nav-link" to={`/Category/${categories[c].title}`}>{categories[c].title} ({categories[c].id})</Link>
+                        <Link key={c.id} className="nav-link" to={`/Category/${c.id}`}>{c.title} ({c.total})</Link>
                     )
                 })}
       </Nav>

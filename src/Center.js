@@ -1,8 +1,9 @@
 import React from 'react'
 import { Col, Row } from 'react-bootstrap'
-import Products from './products'
+//import Products from './products'
 import ProductCard from './ProductCard'
 import { useRouteMatch } from 'react-router'
+import AppContext from './context'
 
 export default function Center(props) {
     let match = useRouteMatch({
@@ -10,6 +11,12 @@ export default function Center(props) {
         strict: true,
         sensitive: true
     })
+
+    const context = React.useContext(AppContext)
+    const Products = context.products
+
+    // console.log(products)
+    // console.log(Products)
 
     return (
         <div>
@@ -21,8 +28,10 @@ export default function Center(props) {
                 {Object.values(Products).filter(p => { 
                     if (match != null)
                     {
+                        console.log(match.params)
+                        console.log(p)
                         return (
-                            p.category === match.params.id)
+                            p.category === parseInt(match.params.id))
                     }        
                     else 
                     {

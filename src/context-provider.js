@@ -59,9 +59,6 @@ export default class AppProvider extends React.Component {
             {products: prods} // data type is an array
         )
         
-
-        //make it into a dictionary for products
-        
     }
 
 }

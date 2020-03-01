@@ -9,7 +9,7 @@ export default function ProductCard(props) {
             <Link to={`/product/${props.product.id}`} className='position-absolute btn btn-secondary' style={{right: 0}}>Details</Link>
             <Card.Body className="bg-secondary p-2 text-center"> 
                 <Card.Title>{props.product.name}</Card.Title>
-                <Card.Text style={{fontSize: 20}}>${props.product.price.toFixed(2)}</Card.Text>
+                <Card.Text style={{fontSize: 20}}>${parseFloat(props.product.price).toFixed(2)}</Card.Text>
             </Card.Body>
         </Card>
     )
