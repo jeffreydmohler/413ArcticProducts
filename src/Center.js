@@ -28,8 +28,6 @@ export default function Center(props) {
                 {Object.values(Products).filter(p => { 
                     if (match != null)
                     {
-                        console.log(match.params)
-                        console.log(p)
                         return (
                             p.category === parseInt(match.params.id))
                     }        

@@ -33,7 +33,7 @@ export default function Left(props) {
 
                 {Object.values(categories).sort().map( (c) => {
                     return (
-                        <Link key={c.id} className="nav-link" to={`/Category/${c.id}`}>{c.title} ({c.total})</Link>
+                        <Link key={c.id} className="nav-link" to={`/Category/${c.title}`}>{c.title} ({c.total})</Link>
                     )
                 })}
       </Nav>
