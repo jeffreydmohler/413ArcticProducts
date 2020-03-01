@@ -1,7 +1,8 @@
 import React from 'react'
 import { Container, Col, Image, Row } from 'react-bootstrap'
 import { useRouteMatch} from 'react-router-dom'
-import Products from './products'
+import AppContext from './context'
+//import Products from './products'
 
 export default function ProductDetail(props) {
     let match = useRouteMatch({
@@ -10,8 +11,11 @@ export default function ProductDetail(props) {
             sensitive: true
     })
 
+    const context = React.useContext(AppContext)
+    const Products = context.products
+
     let product = []
-    product = Object.values(Products).find(x => x.id === match.params.id)
+    product = Object.values(Products).find(x => x.id === parseInt(match.params.id))
     
     const[imgIdx, setImgIdx] = React.useState("1")
 
@@ -32,7 +36,7 @@ export default function ProductDetail(props) {
                     <Col md="8">
                     <h1 className="p-2">{product.name}</h1>
                     <p className="text-justify">{product.description}</p>
-                    <h3 className="text-left">${product.price.toFixed(2)}</h3>
+                    <h3 className="text-left">${parseFloat(product.price).toFixed(2)}</h3>
                     </Col>
                     <Col md="4">
                         <Image rounded src={`/productimages/${product.filename}-${imgIdx}.png`} className=" float-right mt-4" width="300px" height="300px"></Image>
