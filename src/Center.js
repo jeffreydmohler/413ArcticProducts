@@ -28,8 +28,9 @@ export default function Center(props) {
                 {Object.values(Products).filter(p => { 
                     if (match != null)
                     {
+                        const cat = Object.values(context.categories).find(x => x.title === match.params.id)
                         return (
-                            p.category === parseInt(match.params.id))
+                            p.category === cat.id)
                     }        
                     else 
                     {
