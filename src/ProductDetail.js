@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Col, Image, Row } from 'react-bootstrap'
-import { useRouteMatch} from 'react-router-dom'
+import { useRouteMatch, Link} from 'react-router-dom'
 import AppContext from './context'
 //import Products from './products'
 
@@ -37,6 +37,8 @@ export default function ProductDetail(props) {
                     <h1 className="p-2">{product.name}</h1>
                     <p className="text-justify">{product.description}</p>
                     <h3 className="text-left">${parseFloat(product.price).toFixed(2)}</h3>
+                    <br/>
+                    <Link to={"/"} className='position-absolute btn btn-warning' style={{left: 15}} onClick={e=>{context.addToCart(product.id)}} >Add to Cart</Link>
                     </Col>
                     <Col md="4">
                         <Image rounded src={`/productimages/${product.filename}-${imgIdx}.png`} className=" float-right mt-4" width="300px" height="300px"></Image>
