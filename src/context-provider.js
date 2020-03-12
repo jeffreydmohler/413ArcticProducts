@@ -69,12 +69,12 @@ export default class AppProvider extends React.Component {
 
     addToCart = (pid) => 
     {
-        console.log("another") //show where i click add cart
-        console.log(this.state.cart[pid] + " this product to start")
-        console.log(this.state.cartCount + " cart count to start")
+        //console.log("another") //show where i click add cart
+        //console.log(this.state.cart[pid] + " this product to start")
+        //console.log(this.state.cartCount + " cart count to start")
         if (!this.state.cart[pid])
         {
-            console.log("something")
+            //console.log("something")
             this.setState(state => produce(state, draft => {
                 draft.cart[pid] = 1
                 //console.log(draft.cart[pid])
@@ -96,10 +96,10 @@ export default class AppProvider extends React.Component {
     {
         this.setState(state => produce(state, draft => {
             draft.cart[pid] = undefined
-            console.log(draft.cart[pid])
+            //console.log(draft.cart[pid])
         }))
 
-        this.recountCart()
+        //this.recountCart()
     }
 
     recountCart = () =>
