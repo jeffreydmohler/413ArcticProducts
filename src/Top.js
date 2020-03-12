@@ -1,8 +1,12 @@
 import React from 'react'
 import { Navbar, NavDropdown, Nav } from 'react-bootstrap'
 import { Link} from 'react-router-dom'
+import AppContext from './context'
 
 export default function Top(props) {
+
+    const context = React.useContext(AppContext)
+
     return ( 
         <Navbar className="">
    
@@ -23,11 +27,15 @@ export default function Top(props) {
                 <Nav.Item>
                     <Link to="/help" className='text-secondary mr-4'>Help </Link>
                 </Nav.Item>
-                <Nav.Item>
-                    <Link to="/cart" className='text-secondary mr-4'>Cart </Link>
-                </Nav.Item>
             </Nav>
+            
             <Navbar.Collapse className="justify-content-end">
+                <Nav.Item>  
+                    <Link to="/cart" className='text-secondary mr-4 float-right'>
+                            <i className="fas fa-shopping-cart p-2 text-secondary" style={{fontSize: "1.5rem", }}></i> 
+                            <span style={{fontSize: "1.25rem"}}>({context.cartCount}) </span>
+                    </Link>
+                </Nav.Item>
                 <Navbar.Text>
                     <NavDropdown title='Hello Jeffrey Mohler'>
                         <NavDropdown.Item>View Profile</NavDropdown.Item>

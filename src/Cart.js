@@ -22,7 +22,7 @@ export default function Cart(props) {
         return (
         <div className='text-secondary'>
             <h1 className="text-secondary">Shopping Cart</h1>
-            <h2>There are no items in the cart</h2>
+            <h4>There are no items in the cart</h4>
         </div>
         )
     }
@@ -55,7 +55,7 @@ export default function Cart(props) {
                                     <th>{c[1]}</th>
                                     <th>${parseFloat(prod.price).toFixed(2)}</th>
                                     <th>${parseFloat(prod.price * c[1]).toFixed(2)}</th>
-                                    <th><Link to={"/cart"} className='btn'  onClick={e=>{context.removeFromCart(prod.id)}} >Remove</Link></th>
+                                    <th><Link to={"/cart"} className='btn btn-secondary'  onClick={e=>{context.removeFromCart(prod.id, c[1])}} >Remove</Link></th>
                                 </tr>
                             )}) }
                     </tbody>

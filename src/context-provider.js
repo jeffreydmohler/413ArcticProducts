@@ -13,7 +13,7 @@ export default class AppProvider extends React.Component {
             // functions here
             addToCart: this.addToCart,
             removeFromCart: this.removeFromCart,
-            recountCart: this.recountCart
+            //recountCart: this.recountCart
         }
         this.state = {
             categories: {},
@@ -77,6 +77,7 @@ export default class AppProvider extends React.Component {
             //console.log("something")
             this.setState(state => produce(state, draft => {
                 draft.cart[pid] = 1
+                draft.cartCount = draft.cartCount + 1
                 //console.log(draft.cart[pid])
             }))
             //console.log(this.state.cart[pid] + " after adding")
@@ -84,6 +85,7 @@ export default class AppProvider extends React.Component {
         else {
             this.setState(state => produce(state, draft => {
                 draft.cart[pid] = draft.cart[pid] + 1
+                draft.cartCount = draft.cartCount + 1
                 //console.log(draft.cart[pid])
             }))
             //console.log(this.state.cart[pid] + " after adding")
@@ -92,29 +94,29 @@ export default class AppProvider extends React.Component {
         //this.recountCart()
     }
 
-    removeFromCart = (pid) => 
+    removeFromCart = (pid, qty) => 
     {
         this.setState(state => produce(state, draft => {
             draft.cart[pid] = undefined
+            draft.cartCount = draft.cartCount - qty
             //console.log(draft.cart[pid])
         }))
 
         //this.recountCart()
     }
 
-    recountCart = () =>
-    {
-        let tot = 0
+    // recountCart = () =>
+    // {
+    //     let tot = 0
 
-        for (const c of Object.values(this.state.cart))
-        {
-            tot = tot + c
-            console.log('total: ' + tot)
-        }
-
-        this.setState(state => produce(state, draft => {
-            draft.cartCount = tot
-        }))
-    }
-
+    //     for (const c of Object.values(this.state.cart))
+    //     {
+    //         tot = tot + c
+    //         console.log('total: ' + tot)
+    //     }
+        
+    //     this.setState(state => produce(state, draft => {
+    //         draft.cartCount = tot
+    //     }))
+    // }
 }
