@@ -89,7 +89,7 @@ export default class AppProvider extends React.Component {
             //console.log(this.state.cart[pid] + " after adding")
         }
 
-        this.recountCart()
+        //this.recountCart()
     }
 
     removeFromCart = (pid) => 

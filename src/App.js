@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import About from './About'
 import Help from './Help'
 import ProductDetail from './ProductDetail'
+import Cart from './Cart'
 
 function App() {
   return (
@@ -37,6 +38,9 @@ function App() {
                         </Route>
                         <Route path="/product/">
                             <ProductDetail/>
+                        </Route>
+                        <Route path="/cart/">
+                            <Cart/>
                         </Route>
                         <Route path="/">
                             <Center/>

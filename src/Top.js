@@ -23,6 +23,9 @@ export default function Top(props) {
                 <Nav.Item>
                     <Link to="/help" className='text-secondary mr-4'>Help </Link>
                 </Nav.Item>
+                <Nav.Item>
+                    <Link to="/cart" className='text-secondary mr-4'>Cart </Link>
+                </Nav.Item>
             </Nav>
             <Navbar.Collapse className="justify-content-end">
                 <Navbar.Text>
