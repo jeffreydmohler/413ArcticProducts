@@ -38,7 +38,7 @@ export default function ProductDetail(props) {
                     <p className="text-justify">{product.description}</p>
                     <h3 className="text-left">${parseFloat(product.price).toFixed(2)}</h3>
                     <br/>
-                    <Link to={"/"} className='position-absolute btn btn-warning' style={{left: 15}} onClick={e=>{context.addToCart(product.id)}} >Add to Cart</Link>
+                    <Link to={"/cart"} className='position-absolute btn btn-warning' style={{left: 15}} onClick={e=>{context.addToCart(product.id)}} >Add to Cart</Link>
                     </Col>
                     <Col md="4">
                         <Image rounded src={`/productimages/${product.filename}-${imgIdx}.png`} className=" float-right mt-4" width="300px" height="300px"></Image>

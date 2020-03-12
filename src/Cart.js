@@ -1,5 +1,6 @@
 import React from 'react'
-import { Table } from 'react-bootstrap'
+import { Table, Image } from 'react-bootstrap'
+import { Link} from 'react-router-dom'
 import AppContext from './context'
 
 export default function Cart(props) {
@@ -21,19 +22,21 @@ export default function Cart(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {console.log(context.cart)}
-                    {Object.entries(context.cart).map(([key, c]) => { 
-                        {console.log(key, c)}
-                        const prod = Object.values(context.products).find(x => x.id === key)
-                        {console.log(key, c, prod)}
+                    {console.log(context.products)}
+                    {Object.entries(context.cart).filter(c => {
+                        return c[1] !== undefined
+                    }).map((c) => { 
+                        {console.log(c[0], c[1])}
+                        const prod = Object.values(context.products).find(x => x.id === parseInt(c[0]))
+                        {console.log(c[0], c[1], prod)}
                         return (
-                            <tr>
-                                <th></th>
+                            <tr key={prod.id}>
+                                <th><Image rounded src={`/productimages/${prod.filename}-1.png`} width="100px" height="100px"></Image></th>
                                 <th>{prod.name}</th>
-                                <th>{c}</th>
+                                <th>{c[1]}</th>
                                 <th>{prod.price}</th>
-                                <th>{prod.price * c}</th>
-                                <th></th>
+                                <th>{prod.price * c[1]}</th>
+                                <th><Link to={"/cart"} className='btn'  onClick={e=>{context.removeFromCart(prod.id)}} >Remove</Link></th>
                             </tr>
                         )}) }
                 </tbody>
