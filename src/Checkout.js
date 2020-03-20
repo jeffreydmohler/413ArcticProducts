@@ -107,23 +107,38 @@ const PaymentForm = props => (
             <bs.Col>
                 <div className='text-left bg-light border border-dark rounded p-2'>
                     <h5 className='text-decoration-underline'>Shipping</h5>
-                    <Input title="Name:" name="name" type="text" disabled/>
-                    <Input title="Address1:" name="address1" type="text" />
-                    <Input title="Address2:" name="address2" type="text"/>
-                    <Input title="City:" name="city" type="text" />
-                    <Input title="State:" name="state" type="text" />
-                    <Input title="Zip:" name="zipcode" type="number" />
+                    <Input title="Name:" name="name" type="text" disabled={props.form.isSubmitting}/>
+                    <Input title="Address1:" name="address1" type="text" disabled={props.form.isSubmitting}/>
+                    <Input title="Address2:" name="address2" type="text" disabled={props.form.isSubmitting}/>
+                    <Input title="City:" name="city" type="text" disabled={props.form.isSubmitting}/>
+                    <Input title="State:" name="state" type="text" disabled={props.form.isSubmitting}/>
+                    <Input title="Zip:" name="zipcode" type="number" disabled={props.form.isSubmitting}/>
                 </div>
             </bs.Col>
             <bs.Col>
                 <div className='text-left bg-light border border-dark rounded p-2'>
                     <h5 className='text-decoration-underline'>Payment</h5>
-                    <Input title="Card Number:" name="creditcard" type="text" />
+                    <Input title="Card Number:" name="creditcard" type="text" disabled={props.form.isSubmitting}/>
                     <div className='text-center'>
                         Your card will be charged ${props.total}. <br/><br/>
-                        <bs.Button type='submit' className="btn-warning" disabled>
-                            {/* <bs.Spinner animation='border' size='sm'></bs.Spinner> <span>&nbsp;</span>*/}
-                             Purchase</bs.Button>
+                        {(() => {
+                            if (props.form.isSubmitting)
+                            {
+                                return (
+                                <bs.Button type='submit' className="btn-warning" disabled={props.form.isSubmitting}>
+                                    <bs.Spinner animation='border' size='sm' disabled></bs.Spinner> <span>&nbsp;</span>
+                                    Purchase
+                                </bs.Button>
+                                )}
+                            else
+                            {
+                                return (
+                                <bs.Button type='submit' className="btn-warning" disabled={props.form.isSubmitting}>
+                                    Purchase
+                                </bs.Button>
+                                )}
+                        })()}
+                        
                     </div>
                 </div>
             </bs.Col>
@@ -150,6 +165,7 @@ const Input = (props) => (
             <bs.Form.Control
                 type={props.type}
                 placeholder={props.placeholder}
+                disabled={props.disabled}
                 {...rProps.field}
             />
             {rProps.meta.touched && rProps.meta.error &&
