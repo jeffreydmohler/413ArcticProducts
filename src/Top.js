@@ -15,7 +15,7 @@ export default function Top(props) {
             }}></i> 
             
             <Navbar.Brand href="/" style={{fontSize: "2rem"}} className="">
-                Artic Products
+                Arctic Products
             </Navbar.Brand>
             <Nav defaultActiveKey="/" style={{fontSize: "1.25rem"}} className="align-bottom">
                 <Nav.Item>

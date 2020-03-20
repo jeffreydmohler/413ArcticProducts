@@ -13,6 +13,7 @@ export default class AppProvider extends React.Component {
             // functions here
             addToCart: this.addToCart,
             removeFromCart: this.removeFromCart,
+            getCartTotal: this.getCartTotal,
             //recountCart: this.recountCart
         }
         this.state = {
@@ -97,12 +98,25 @@ export default class AppProvider extends React.Component {
     removeFromCart = (pid, qty) => 
     {
         this.setState(state => produce(state, draft => {
-            draft.cart[pid] = undefined
+            delete draft.cart[pid]
             draft.cartCount = draft.cartCount - qty
             //console.log(draft.cart[pid])
         }))
 
         //this.recountCart()
+    }
+
+    getCartTotal = () =>
+    {
+        let total = 0
+
+        Object.entries(this.state.cart).map((c) => { 
+            const prod = Object.values(this.state.products).find(x => x.id === parseInt(c[0]))
+            total = total + (prod.price * c[1])
+            return (total)
+        })
+        
+        return (parseFloat(total).toFixed(2))
     }
 
     // recountCart = () =>

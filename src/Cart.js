@@ -43,9 +43,7 @@ export default function Cart(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {Object.entries(context.cart).filter(c => {
-                            return c[1] !== undefined
-                        }).map((c) => { 
+                        {Object.entries(context.cart).map((c) => { //.filter(c => {return c[1] !== undefined})
                             const prod = Object.values(context.products).find(x => x.id === parseInt(c[0]))
                             total = total + (prod.price * c[1])
                             return (
@@ -70,6 +68,7 @@ export default function Cart(props) {
                         </tr>
                     </thead>
                 </Table>
+                <Link to={"/checkout"} className='btn btn-warning float-right w-100'>Checkout</Link>
             </div>
         )
     }
