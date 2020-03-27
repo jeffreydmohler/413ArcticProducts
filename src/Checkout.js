@@ -3,16 +3,19 @@ import * as bs from 'react-bootstrap'
 import { Formik, Form, Field} from 'formik'
 import AppContext from './context'
 import axios from 'axios'
-// import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-// import { loadStripe } from '@stripe/stripe-js';
+import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { useHistory } from 'react-router'
 
 
-// const stripePromise = loadStripe(...)
+const stripePromise = loadStripe('pk_test_CPAu6sGwqjTbRvKkWFmBaOCO006josfk80')
 
 function Checkout(props) {
     // we'll add Stripe's Elements component here later
     return (
-        <CheckoutController />
+        <Elements stripe={stripePromise}>
+            <CheckoutController />
+        </Elements>
     )
 }
 export default Checkout
@@ -23,6 +26,9 @@ const CheckoutController = props => {
     const total = context.getCartTotal()
     const items = {}
     let iCount = 0
+    const stripe = useStripe()
+    const elements = useElements()
+    let history = useHistory()
 
     Object.entries(context.cart).map(i => {
         const prod = Object.values(context.products).find(x => x.id === parseInt(i[0]))
@@ -73,6 +79,10 @@ const CheckoutController = props => {
                 {
                     errors.zipcode = 'Zip is a required field'
                 }
+                if (total === 0)
+                {
+                    errors.payment = 'Cart is empty'
+                }
  
                 return errors
             }}
@@ -83,9 +93,32 @@ const CheckoutController = props => {
                      values
                 })
                 console.log(resp.data)
-                setTimeout(() => {  // wait 2 seconds, then set the form as "not submitting"
-                    actions.setSubmitting(false)
-                }, 2000)
+
+                const stripeResp = await stripe.confirmCardPayment(resp.data.client_secret, {
+                    payment_method: {
+                        card: elements.getElement(CardElement),
+                        billing_details: {
+                            name: values.name,
+                            address: values.address1 + " " + values.address2 + " " +  values.city + ", " + values.state + " " + values.zipcode,
+                        }
+                    }
+                })
+                console.log(stripeResp, 1)
+                if (stripeResp.error) {
+                    console.log(stripeResp.error.message)
+                    actions.setFieldError('payment', stripeResp.error.message)
+                }
+                else {
+                    if (stripeResp.paymentIntent.status === 'succeeded') {
+                        context.clearCart()
+                        history.push('/receipt')
+                    }
+                }
+                
+
+                // setTimeout(() => {  // wait 2 seconds, then set the form as "not submitting"
+                //     actions.setSubmitting(false)
+                // }, 2000)
             }}
         >{form => (
             <PaymentForm form={form} total={total}/>
@@ -98,6 +131,28 @@ const CheckoutController = props => {
  * The form layout/html.
  * This component needs finishing.
  */
+
+const CARD_ELEMENT_OPTIONS = {
+    style: {
+      base: {
+        color: "#32325d",
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: "antialiased",
+        fontSize: "16px",
+        "::placeholder": {
+          color: "#aab7c4",
+        },
+        // backgroundColor: "#ffffff",
+        // padding: "4px",
+      },
+      invalid: {
+        color: "#fa755a",
+        iconColor: "#fa755a",
+      },
+    },
+    disabled: false
+  };
+
 const PaymentForm = props => (
     <bs.Container>
         <Form>
@@ -117,8 +172,19 @@ const PaymentForm = props => (
             </bs.Col>
             <bs.Col>
                 <div className='text-left bg-light border border-dark rounded p-2'>
-                    <h5 className='text-decoration-underline'>Payment</h5>
-                    <Input title="Card Number:" name="creditcard" type="text" disabled={props.form.isSubmitting}/>
+                    <h5 className='text-decoration-underline'>Payment</h5><br/>
+                    <div className="bg-danger border border-light rounded pt-3 pl-2 pr-2">                       
+                        <Field name='payment'>{rProps => (
+                            <bs.Form.Group>                       
+                            {CARD_ELEMENT_OPTIONS.disabled = props.form.isSubmitting}
+                            <CardElement options={CARD_ELEMENT_OPTIONS} />
+                            {rProps.meta.error &&
+                                <span className="text-warning">{rProps.meta.error}</span>}
+                            </bs.Form.Group>
+                        )}</Field>
+
+                    </div>
+                    <br/>
                     <div className='text-center'>
                         Your card will be charged ${props.total}. <br/><br/>
                         {(() => {
@@ -169,7 +235,7 @@ const Input = (props) => (
                 {...rProps.field}
             />
             {rProps.meta.touched && rProps.meta.error &&
-                <div className="text-danger">{rProps.meta.error}</div>
+                <div className="text-warning">{rProps.meta.error}</div>
             }
         </bs.Form.Group>
     )}</Field>

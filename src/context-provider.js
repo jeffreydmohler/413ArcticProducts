@@ -14,6 +14,7 @@ export default class AppProvider extends React.Component {
             addToCart: this.addToCart,
             removeFromCart: this.removeFromCart,
             getCartTotal: this.getCartTotal,
+            clearCart: this.clearCart,
             //recountCart: this.recountCart
         }
         this.state = {
@@ -116,7 +117,15 @@ export default class AppProvider extends React.Component {
             return (total)
         })
         
-        return (parseFloat(total).toFixed(2))
+        return (total)
+    }
+
+    clearCart = () =>
+    {
+        this.setState(state => produce(state, draft => {
+            draft.cart = {}
+            draft.cartCount = 0
+        }))
     }
 
     // recountCart = () =>

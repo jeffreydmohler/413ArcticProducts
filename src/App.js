@@ -13,6 +13,7 @@ import Help from './Help'
 import ProductDetail from './ProductDetail'
 import Cart from './Cart'
 import Checkout from './Checkout'
+import Receipt from './Receipt'
 
 function App() {
   return (
@@ -45,6 +46,9 @@ function App() {
                         </Route>
                         <Route path="/checkout/">
                             <Checkout/>
+                        </Route>
+                        <Route path="/receipt/">
+                            <Receipt/>
                         </Route>
                         <Route path="/">
                             <Center/>
