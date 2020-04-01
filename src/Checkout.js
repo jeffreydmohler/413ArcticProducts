@@ -88,7 +88,7 @@ const CheckoutController = props => {
             }}
             onSubmit={async (values, actions) => {
                 console.log('submit', values)
-                const resp = await axios.post('http://localhost:8000/api/sale/', {
+                const resp = await axios.post('/api/sale/', {
                     //values go here
                      values
                 })

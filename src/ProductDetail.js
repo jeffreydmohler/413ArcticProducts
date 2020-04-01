@@ -41,23 +41,23 @@ export default function ProductDetail(props) {
                     <Link to={"/cart"} className='position-absolute btn btn-warning' style={{left: 15}} onClick={e=>{context.addToCart(product.id)}} >Add to Cart</Link>
                     </Col>
                     <Col md="4">
-                        <Image rounded src={`/productimages/${product.filename}-${imgIdx}.png`} className=" float-right mt-4" width="300px" height="300px"></Image>
+                        <Image rounded src={`${process.env.PUBLIC_URL}/productimages/${product.filename}-${imgIdx}.png`} className=" float-right mt-4" width="300px" height="300px"></Image>
                         <Row className="">
                             <Col></Col>
                             <Col> 
-                                <Image rounded src={`/productimages/${product.filename}-1.png`} onMouseEnter={() => setImgIdx(1)} onMouseLeave={() => setImgIdx(1)} 
+                                <Image rounded src={`${process.env.PUBLIC_URL}/productimages/${product.filename}-1.png`} onMouseEnter={() => setImgIdx(1)} onMouseLeave={() => setImgIdx(1)} 
                                 className="float-right mt-4 mb-4" width="30px" height="30px"></Image>
                             </Col>
                             <Col> 
-                                <Image rounded src={`/productimages/${product.filename}-2.png`} onMouseEnter={() => setImgIdx(2)} onMouseLeave={() => setImgIdx(1)} 
+                                <Image rounded src={`${process.env.PUBLIC_URL}/productimages/${product.filename}-2.png`} onMouseEnter={() => setImgIdx(2)} onMouseLeave={() => setImgIdx(1)} 
                                 className="float-right mt-4 mb-4" width="30px" height="30px"></Image>
                             </Col>
                             <Col> 
-                                <Image rounded src={`/productimages/${product.filename}-3.png`} onMouseEnter={() => setImgIdx(3)} onMouseLeave={() => setImgIdx(1)} 
+                                <Image rounded src={`${process.env.PUBLIC_URL}/productimages/${product.filename}-3.png`} onMouseEnter={() => setImgIdx(3)} onMouseLeave={() => setImgIdx(1)} 
                                 className="float-right mt-4 mb-4" width="30px" height="30px"></Image>
                             </Col>
                             <Col> 
-                                <Image rounded src={`/productimages/${product.filename}-4.png`} onMouseEnter={() => setImgIdx(4)} onMouseLeave={() => setImgIdx(1)} 
+                                <Image rounded src={`${process.env.PUBLIC_URL}/productimages/${product.filename}-4.png`} onMouseEnter={() => setImgIdx(4)} onMouseLeave={() => setImgIdx(1)} 
                                 className="float-right mt-4 mb-4" width="30px" height="30px"></Image>
                             </Col>
                             <Col></Col>

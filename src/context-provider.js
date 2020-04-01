@@ -44,7 +44,7 @@ export default class AppProvider extends React.Component {
     //axios - third party
 
     async componentDidMount() {
-        const catresp = await axios.get('http://localhost:8000/api/category/')
+        const catresp = await axios.get('/api/category/')
         const cats = {}
         
         for (const cat of catresp.data) {
@@ -56,7 +56,7 @@ export default class AppProvider extends React.Component {
         )
         
 
-        const prodresp = await axios.get('http://localhost:8000/api/product/')
+        const prodresp = await axios.get('/api/product/')
         const prods = {}
 
         for (const prod of prodresp.data) {
