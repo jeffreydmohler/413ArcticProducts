@@ -48,7 +48,7 @@ export default function Cart(props) {
                             total = total + (prod.price * c[1])
                             return (
                                 <tr key={prod.id}>
-                                    <th><Image rounded src={`/productimages/${prod.filename}-1.png`} width="100px" height="100px"></Image></th>
+                                    <th><Image rounded src={`${process.env.PUBLIC_URL}/productimages/${prod.filename}-1.png`} width="100px" height="100px"></Image></th>
                                     <th>{prod.name}</th>
                                     <th>{c[1]}</th>
                                     <th>${parseFloat(prod.price).toFixed(2)}</th>
